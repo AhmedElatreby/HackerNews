@@ -44,9 +44,13 @@ class NewsDbProvider {
       where: "id = ?",
       whereArgs: [id],
     );
-    if (maps.length > 0 ) {
-
+    if (maps.isNotEmpty) {
+      return ItemModel.fromDB(maps.first);
     }
     return null;
+  }
+
+  addItem(ItemModel item) {
+    return db.insert("Item", item.toMapForDb());
   }
 }
