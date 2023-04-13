@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext  context) {
     return StoriesProvider(
       key: UniqueKey(),
-      child: MaterialApp(
+      child: const MaterialApp(
         title: 'News!',
         home: NewsList(),
       ),

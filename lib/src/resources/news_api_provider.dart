@@ -5,7 +5,7 @@ import 'package:http/http.dart' show Client;
 import '../models/item_model.dart';
 import 'source.dart';
 
-final _root = 'https://hacker-news.firebaseio.com/v0';
+const _root = 'https://hacker-news.firebaseio.com/v0';
 
 class NewApiProvider implements Source {
   Client client = Client();
