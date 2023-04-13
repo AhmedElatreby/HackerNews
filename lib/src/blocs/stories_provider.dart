@@ -6,9 +6,9 @@ import 'package:news/src/blocs/stories_provider.dart';
 class StoriesProvider extends InheritedWidget {
   final StoriesBloc bloc;
 
-  StoriesProvider({required Key key, required Widget child})
+  StoriesProvider({Key? key, required Widget child, required Center Function(dynamic context, dynamic bloc) builder})
       : bloc = StoriesBloc(),
-        super(key: key, child: child);
+        super(key: key ?? const ValueKey('StoriesProvider'), child: child);
 
   @override
   bool updateShouldNotify(oldWidget) => true;

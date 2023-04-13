@@ -4,11 +4,19 @@ import '../blocs/stories_provider.dart';
 import '../widgets/news_list_tile.dart';
 
 class NewsList extends StatelessWidget {
-  const NewsList({super.key});
+  const NewsList({Key? key}) : super(key: key);
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     final bloc = StoriesProvider.of(context);
+    if (bloc == null) {
+      return StoriesProvider(
+        child: this,
+        builder: (context, bloc) => Center(
+          child: Text('Error: Could not retrieve StoriesProvider'),
+        ),
+      );
+    }
 
     bloc.fetchTopIds();
 
@@ -23,7 +31,7 @@ class NewsList extends StatelessWidget {
   Widget buildList(StoriesBloc bloc) {
     return StreamBuilder(
       stream: bloc.topIds,
-      builder: (context, AsyncSnapshot<List<int>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
         if (!snapshot.hasData) {
           return const Center(
             child: CircularProgressIndicator(),
@@ -32,8 +40,6 @@ class NewsList extends StatelessWidget {
         return ListView.builder(
           itemCount: snapshot.data!.length,
           itemBuilder: (BuildContext context, int index) {
-            bloc.fetchItems(snapshot.data![index]);
-            
             return NewsListTile(itemId: snapshot.data![index]);
           },
         );
