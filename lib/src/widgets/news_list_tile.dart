@@ -6,13 +6,13 @@ import 'dart:async';
 class NewsListTile extends StatelessWidget {
   final int itemId;
 
-  const NewsListTile({super.key, required this.itemId});
+   const NewsListTile({super.key, required this.itemId});
 
   @override
   Widget build(context) {
     final bloc = StoriesProvider.of(context);
     return StreamBuilder(
-      stream: bloc.items,
+      stream: bloc?.items,
       builder: (context, AsyncSnapshot<Map<int, Future<ItemModel>>> snapshot) {
         if (!snapshot.hasData) {
           return const Text('Stream still loading');

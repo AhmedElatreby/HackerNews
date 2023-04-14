@@ -23,8 +23,8 @@ class Repository {
   }
 
   Future<ItemModel> fetchItem(int id) async {
-    ItemModel? item = null; // Initialize item to null
-    Source source;
+    ItemModel? item; // Initialize item to null
+    var source;
 
     for (source in sources) {
       item = await source.fetchItem(id);
@@ -33,9 +33,9 @@ class Repository {
       }
     }
 
-    if (item != null) {
-      for (var cache in caches) {
-        cache.addItem(item);
+    for (var cache in caches) {
+      if (cache != source) {
+        cache.addItem(item!);
       }
     }
 

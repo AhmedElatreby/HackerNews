@@ -24,9 +24,7 @@ class ItemModel {
         text = parsedJson['text'] ?? '',
         dead = parsedJson['dead'] ?? false,
         parent = parsedJson['parent'] ?? 0,
-        kids = parsedJson['kids'] != null
-            ? List<int>.from(parsedJson['kids'])
-            : [],
+        kids = parsedJson['kids'] ?? [],
         url = parsedJson['url'] ?? '',
         score = parsedJson['score'] ?? 0,
         title = parsedJson['title'] ?? '',
@@ -41,7 +39,7 @@ class ItemModel {
         text = parsedJson['text'] ?? '',
         dead = parsedJson['dead'] == 1,
         parent = parsedJson['parent'] ?? 0,
-        kids = jsonDecode(parsedJson['kids']),
+        kids = jsonDecode(parsedJson['kids'] ?? []),
         url = parsedJson['url'] ?? '',
         score = parsedJson['score'] ?? 0,
         title = parsedJson['title'] ?? '',
