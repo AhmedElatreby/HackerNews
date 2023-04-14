@@ -52,23 +52,26 @@ class NewsDbProvider implements Source, Cache {
       whereArgs: [id],
     );
     if (maps.isNotEmpty) {
-      return ItemModel.fromDB(maps.first);
+      return ItemModel.fromDb(maps.first);
     }
     return Future.value(null);
   }
 
-  @override
   Future<int> addItem(ItemModel item) {
     return db.insert(
       "Items",
       item.toMapForDb(),
-      conflictAlgorithm: ConflictAlgorithm.ignore
     );
   }
 
-  @override
   Future<List<int>> fetchTopIds() {
     return fetchTopIds();
+  }
+
+  @override
+  Future<int> clear() {
+    // TODO: implement clear
+    throw UnimplementedError();
   }
 }
 

@@ -23,22 +23,28 @@ class Repository {
   }
 
   Future<ItemModel> fetchItem(int id) async {
-    ItemModel? item; // Initialize item to null
+    ItemModel? itemModel; // Initialize item to null
     var source;
 
     for (source in sources) {
-      item = await source.fetchItem(id);
-      if (item != null) {
+      itemModel = await source.fetchItem(id);
+      if (itemModel != null) {
         break;
       }
     }
 
     for (var cache in caches) {
       if (cache != source) {
-        cache.addItem(item!);
+        cache.addItem(itemModel!);
       }
     }
 
-    return item!;
+    return itemModel!;
+  }
+
+  clearCache() async {
+    for (var cache in caches) {
+      await cache.clear();
+    }
   }
 }

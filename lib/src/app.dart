@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/news_list.dart';
-
+import 'blocs/stories_bloc.dart';
 import 'blocs/stories_provider.dart';
 
 class App extends StatelessWidget {
@@ -9,9 +9,9 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoriesProvider(
-      builder: (context, bloc) => const Center(),
+      builder: (context, bloc) => Center(),
       key: UniqueKey(),
-      child: const MaterialApp(
+      child: MaterialApp(
         title: 'News',
         home: NewsList(),
       ),
