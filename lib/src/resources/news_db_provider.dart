@@ -45,22 +45,24 @@ class NewsDbProvider implements Source, Cache {
 
   @override
   Future<ItemModel> fetchItem(int id) async {
-    final maps = await db.query(
+    final List<Map<String, dynamic>> maps = await db.query(
       "Items",
       columns: null,
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [id],
     );
     if (maps.isNotEmpty) {
       return ItemModel.fromDb(maps.first);
+    } else {
+      throw Exception('Item not found');
     }
-    return Future.value(null);
   }
 
   Future<int> addItem(ItemModel item) {
     return db.insert(
       "Items",
       item.toMapForDb(),
+      conflictAlgorithm: ConflictAlgorithm.ignore
     );
   }
 

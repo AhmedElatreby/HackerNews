@@ -22,7 +22,7 @@ class Repository {
     return sources[1].fetchTopIds();
   }
 
-  Future<ItemModel> fetchItem(int id) async {
+  Future<ItemModel?> fetchItem(int id) async {
     ItemModel? itemModel; // Initialize item to null
     var source;
 
@@ -33,9 +33,11 @@ class Repository {
       }
     }
 
-    for (var cache in caches) {
-      if (cache != source) {
-        cache.addItem(itemModel!);
+    if (itemModel != null) {
+      for (var cache in caches) {
+        if (cache != source) {
+          cache.addItem(itemModel);
+        }
       }
     }
 
